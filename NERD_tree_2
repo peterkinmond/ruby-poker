@@ -1,0 +1,17 @@
+" Press ? for help
+
+.. (up a dir)
+<rkspace/ruby-project-skeleton/
+|~bin/
+| `-NAME
+|~data/
+|~doc/
+|~ext/
+|~lib/
+| |~NAME/
+| `-NAME.rb
+|~tests/
+| `-test_NAME.rb
+|-NAME.gemspec
+|-Rakefile
+`-README.md
