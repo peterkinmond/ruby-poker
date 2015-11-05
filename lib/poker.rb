@@ -1,4 +1,4 @@
-class NAME
+class Poker
 
   def self.foo(number1, number2)
     number1 + number2

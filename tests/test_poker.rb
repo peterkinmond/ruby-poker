@@ -1,18 +1,18 @@
-require "./lib/NAME.rb"
+require "./lib/poker.rb"
 require "test/unit"
 
-class TestNAME < Test::Unit::TestCase
+class TestPoker < Test::Unit::TestCase
 
   def test_sample
     assert_equal(4, 2 + 2)
   end
 
   def test_class_method
-    assert_equal(5, NAME.foo(3,2))
+    assert_equal(5, Poker.foo(3,2))
   end
 
   def test_instance_method
-    name = NAME.new
+    name = Poker.new
     assert_equal(6, name.bar(3,2))
   end
 
