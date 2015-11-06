@@ -6,6 +6,8 @@ class TestPlayer < Test::Unit::TestCase
     player1 = Player.new("Peter")
     assert_equal("Peter", player1.name)
     assert_equal([], player1.cards)
+    assert_equal(100, player1.money)
+    assert_equal("Hopeful", player1.mood)
   end
 
 end
