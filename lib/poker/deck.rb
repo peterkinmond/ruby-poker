@@ -8,6 +8,20 @@ class Deck
     create_cards
   end
 
+  def shuffle
+    @cards = @cards.shuffle
+  end
+
+  def deal_card
+    @cards.shift
+  end
+
+  def cards_left
+    @cards.length
+  end
+
+  private
+
   def create_cards
     @cards = []
     SUITS.each do |suit|
@@ -17,7 +31,4 @@ class Deck
     end
   end
 
-  def shuffle
-    @cards = @cards.shuffle
-  end
 end
