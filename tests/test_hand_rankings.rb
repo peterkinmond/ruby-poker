@@ -69,7 +69,15 @@ class TestHandRankings < Test::Unit::TestCase
   end
 
   def test_three_of_a_kind
-    # TODO: complete this
+    card1 = Card.new(5, 'Hearts')
+    card2 = Card.new(5, 'Diamonds')
+    card3 = Card.new(5, 'Clubs')
+    card4 = Card.new(9, 'Spades')
+    card5 = Card.new(8, 'Spades')
+    hand = Hand.new(card1, card2, card3, card4, card5)
+    rank = HandRankings.get_rank(hand)
+    assert_equal(4, rank.value)
+    assert_equal("Three of a Kind", rank.name)
   end
 
   def test_two_pair

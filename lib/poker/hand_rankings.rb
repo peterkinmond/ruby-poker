@@ -26,8 +26,8 @@ class HandRankings
       Rank.new(6, "Flush")
     elsif straight?(hand)
       Rank.new(5, "Straight")
-    #elsif three_of_a_kind?(hand)
-      #Rank.new(4, "Three of a Kind")
+    elsif three_of_a_kind?(hand)
+      Rank.new(4, "Three of a Kind")
     #elsif two_pair?(hand)
       #Rank.new(3, "Two Pair")
     #elsif one_pair?(hand)
@@ -79,6 +79,22 @@ class HandRankings
       end
     end
     return true
+  end
+
+  def self.three_of_a_kind?(hand)
+    # TODO: DRY this up
+    ordered_card_values = hand.cards.map{|card| card.number}.sort
+
+    card_count = {}
+    ordered_card_values.each do |val|
+      if card_count.has_key?(val)
+        card_count[val] += 1
+        return true if card_count[val] == 3
+      else
+        card_count[val] = 1
+      end
+    end
+    return false
   end
 
 end
