@@ -14,10 +14,10 @@ class HandRankings
   # 1  High Card
 
   # TODO: Use more graceful way of schleping cards around
-  def self.get_rank(card1, card2, card3, card4, card5)
-    if flush?(card1, card2, card3, card4, card5)
-      if straight?(card1, card2, card3, card4, card5)
-        if hasAce?(card1, card2, card3, card4, card5)
+  def self.get_rank(hand)
+    if flush?(hand)
+      if straight?(hand)
+        if hasAce?(hand)
           Rank.new(10, "Royal Flush")
         else
           Rank.new(9, "Straight Flush")
@@ -25,30 +25,23 @@ class HandRankings
       else
         Rank.new(6, "Flush")
       end
-    elsif straight?(card1, card2, card3, card4, card5)
+    elsif straight?(hand)
       Rank.new(5, "Straight")
     end
   end
 
-  def self.hasAce?(*cards)
+  def self.hasAce?(hand)
     # TODO: Get rid of magic number
-    cards.any?{|card| card.number == 14}
+    hand.cards.any?{|card| card.number == 14}
   end
 
-  def self.flush?(card1, card2, card3, card4, card5)
-    card1.suit == card2.suit &&
-      card2.suit == card3.suit &&
-      card3.suit == card4.suit &&
-      card4.suit == card5.suit
+  def self.flush?(hand)
+    suit = hand.cards[0].suit
+    hand.cards.all?{|card| card.suit == suit}
   end
 
-  def self.straight?(card1, card2, card3, card4, card5)
-    card_values = [card1.number, card2.number, card3.number,
-                   card4.number, card5.number]
-
-    ordered_card_values = card_values.sort
-    # [3,4,5,6,7] => true
-    # [1,2,3,6,8] => false
+  def self.straight?(hand)
+    ordered_card_values = hand.cards.map{|card| card.number}.sort
     first_num = ordered_card_values[0]
     ordered_card_values.each_with_index do |val, index|
       if first_num + index != val
