@@ -28,6 +28,14 @@ class TestHandRankings < Test::Unit::TestCase
     assert_equal("Straight Flush", rank.name)
   end
 
+  def test_four_of_a_kind
+    # TODO: complete this
+  end
+
+  def test_full_house
+    # TODO: complete this
+  end
+
   def test_flush
     card1 = Card.new(9, 'Spades')
     card2 = Card.new(5, 'Spades')
@@ -50,6 +58,18 @@ class TestHandRankings < Test::Unit::TestCase
     rank = HandRankings.get_rank(hand)
     assert_equal(5, rank.value)
     assert_equal("Straight", rank.name)
+  end
+
+  def test_three_of_a_kind
+    # TODO: complete this
+  end
+
+  def test_two_pair
+    # TODO: complete this
+  end
+
+  def test_one_pair
+    # TODO: complete this
   end
 
   def test_high_card
