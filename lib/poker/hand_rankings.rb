@@ -13,6 +13,7 @@ class HandRankings
   # 2  One Pair
   # 1  High Card
 
+  # TODO: Use more graceful way of schleping cards around
   def self.get_rank(card1, card2, card3, card4, card5)
     if flush?(card1, card2, card3, card4, card5)
       if straight?(card1, card2, card3, card4, card5)
@@ -30,7 +31,8 @@ class HandRankings
   end
 
   def self.hasAce?(*cards)
-    false
+    # TODO: Get rid of magic number
+    cards.any?{|card| card.number == 14}
   end
 
   def self.flush?(card1, card2, card3, card4, card5)
