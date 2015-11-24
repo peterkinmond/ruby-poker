@@ -1,5 +1,5 @@
-require "./lib/poker/hand.rb"
-require "./lib/poker/card.rb"
+require "./lib/poker/hand"
+require "./lib/poker/card"
 require "test/unit"
 
 class TestHand < Test::Unit::TestCase

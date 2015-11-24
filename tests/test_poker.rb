@@ -1,4 +1,4 @@
-require "./lib/poker.rb"
+require "./lib/poker"
 require "test/unit"
 
 class TestPoker < Test::Unit::TestCase
