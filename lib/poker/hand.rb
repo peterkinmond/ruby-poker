@@ -6,6 +6,11 @@ class Hand
   attr_reader :cards
 
   def initialize(*cards)
-    @cards = cards
+    if cards.all?{|card| card.is_a?(Card)}
+      @cards = cards
+    # TODO: Add easier way of creating card hands
+    #else
+      #cards.each{|card_string| @cards << Card.new(card_string)}
+    end
   end
 end
