@@ -26,6 +26,8 @@ class HandRankings
       end
     elsif straight?(hand)
       Rank.new(5, "Straight")
+    else
+      Rank.new(1, "High Card")
     end
   end
 

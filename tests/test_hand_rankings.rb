@@ -52,4 +52,17 @@ class TestHandRankings < Test::Unit::TestCase
     assert_equal("Straight", rank.name)
   end
 
+  def test_high_card
+    card1 = Card.new(2, 'Spades')
+    card2 = Card.new(5, 'Hearts')
+    card3 = Card.new(7, 'Diamonds')
+    card4 = Card.new(9, 'Clubs')
+    card5 = Card.new(10, 'Spades')
+    hand = Hand.new(card1, card2, card3, card4, card5)
+    rank = HandRankings.get_rank(hand)
+    assert_equal(1, rank.value)
+    assert_equal("High Card", rank.name)
+  end
+
+
 end
