@@ -1,4 +1,6 @@
 require "./lib/poker/hand_rankings"
+require "./lib/poker/card"
+require "test/unit"
 
 class TestHandRankings < Test::Unit::TestCase
 
