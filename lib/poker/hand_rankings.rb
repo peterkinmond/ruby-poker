@@ -13,7 +13,6 @@ class HandRankings
   # 2  One Pair
   # 1  High Card
 
-  # TODO: Use more graceful way of schleping cards around
   def self.get_rank(hand)
     if flush?(hand)
       if straight?(hand)
