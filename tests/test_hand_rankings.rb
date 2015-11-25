@@ -89,11 +89,27 @@ class TestHandRankings < Test::Unit::TestCase
   end
 
   def test_two_pair
-    # TODO: complete this
+    card1 = Card.new(5, 'Hearts')
+    card2 = Card.new(5, 'Diamonds')
+    card3 = Card.new(7, 'Clubs')
+    card4 = Card.new(8, 'Hearts')
+    card5 = Card.new(8, 'Spades')
+    hand = Hand.new(card1, card2, card3, card4, card5)
+    rank = HandRankings.get_rank(hand)
+    assert_equal(3, rank.value)
+    assert_equal("Two Pair", rank.name)
   end
 
   def test_one_pair
-    # TODO: complete this
+    card1 = Card.new(2, 'Hearts')
+    card2 = Card.new(5, 'Diamonds')
+    card3 = Card.new(7, 'Clubs')
+    card4 = Card.new(8, 'Hearts')
+    card5 = Card.new(8, 'Spades')
+    hand = Hand.new(card1, card2, card3, card4, card5)
+    rank = HandRankings.get_rank(hand)
+    assert_equal(2, rank.value)
+    assert_equal("One Pair", rank.name)
   end
 
   def test_high_card

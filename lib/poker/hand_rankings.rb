@@ -28,10 +28,10 @@ class HandRankings
       Rank.new(5, "Straight")
     elsif three_of_a_kind?(hand)
       Rank.new(4, "Three of a Kind")
-    #elsif two_pair?(hand)
-      #Rank.new(3, "Two Pair")
-    #elsif one_pair?(hand)
-      #Rank.new(2, "One Pair")
+    elsif two_pair?(hand)
+      Rank.new(3, "Two Pair")
+    elsif one_pair?(hand)
+      Rank.new(2, "One Pair")
     else
       Rank.new(1, "High Card")
     end
@@ -60,6 +60,16 @@ class HandRankings
   def self.three_of_a_kind?(hand)
     card_count = get_multiples(hand)
     card_count.values.include?(3)
+  end
+
+  def self.two_pair?(hand)
+    card_count = get_multiples(hand)
+    card_count.values.sort == [1, 2, 2]
+  end
+
+  def self.one_pair?(hand)
+    card_count = get_multiples(hand)
+    card_count.values.sort == [1, 1, 1, 2]
   end
 
   def self.get_multiples(hand)
