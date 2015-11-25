@@ -41,7 +41,15 @@ class TestHandRankings < Test::Unit::TestCase
   end
 
   def test_full_house
-    # TODO: complete this
+    card1 = Card.new(5, 'Hearts')
+    card2 = Card.new(5, 'Diamonds')
+    card3 = Card.new(5, 'Clubs')
+    card4 = Card.new(8, 'Hearts')
+    card5 = Card.new(8, 'Spades')
+    hand = Hand.new(card1, card2, card3, card4, card5)
+    rank = HandRankings.get_rank(hand)
+    assert_equal(7, rank.value)
+    assert_equal("Full House", rank.name)
   end
 
   def test_flush

@@ -20,8 +20,8 @@ class HandRankings
       Rank.new(9, "Straight Flush")
     elsif four_of_a_kind?(hand)
       Rank.new(8, "Four of a Kind")
-    #elsif full_house?(hand)
-      #Rank.new(7, "Full House")
+    elsif full_house?(hand)
+      Rank.new(7, "Full House")
     elsif flush?(hand)
       Rank.new(6, "Flush")
     elsif straight?(hand)
@@ -46,18 +46,33 @@ class HandRankings
   end
 
   def self.four_of_a_kind?(hand)
-    ordered_card_values = hand.cards.map{|card| card.number}.sort
+    card_count = get_multiples(hand)
+    card_count.values.include?(4)
+  end
 
+  def self.full_house?(hand)
+    card_count = get_multiples(hand)
+    # Full House needs 3 of a kind and a pair
+    card_count.values.include?(3) &&
+      card_count.values.include?(2)
+  end
+
+  def self.three_of_a_kind?(hand)
+    card_count = get_multiples(hand)
+    card_count.values.include?(3)
+  end
+
+  def self.get_multiples(hand)
+    values = hand.cards.map{|card| card.number}
     card_count = {}
-    ordered_card_values.each do |val|
+    values.each do |val|
       if card_count.has_key?(val)
         card_count[val] += 1
-        return true if card_count[val] == 4
       else
         card_count[val] = 1
       end
     end
-    return false
+    card_count
   end
 
   def self.has_ace?(hand)
@@ -81,20 +96,5 @@ class HandRankings
     return true
   end
 
-  def self.three_of_a_kind?(hand)
-    # TODO: DRY this up
-    ordered_card_values = hand.cards.map{|card| card.number}.sort
-
-    card_count = {}
-    ordered_card_values.each do |val|
-      if card_count.has_key?(val)
-        card_count[val] += 1
-        return true if card_count[val] == 3
-      else
-        card_count[val] = 1
-      end
-    end
-    return false
-  end
 
 end
