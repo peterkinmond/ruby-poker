@@ -47,19 +47,34 @@ class HandRankings
 
   def self.four_of_a_kind?(hand)
     card_count = get_multiples(hand)
-    card_count.values.include?(4)
+    card_count.values.sort == [1, 4]
   end
 
   def self.full_house?(hand)
     card_count = get_multiples(hand)
     # Full House needs 3 of a kind and a pair
-    card_count.values.include?(3) &&
-      card_count.values.include?(2)
+    card_count.values.sort == [2, 3]
+  end
+
+  def self.flush?(hand)
+    suit = hand.cards.first.suit
+    hand.cards.all?{|card| card.suit == suit}
+  end
+
+  def self.straight?(hand)
+    ordered_card_values = hand.cards.map{|card| card.number}.sort
+    first_num = ordered_card_values.first
+    ordered_card_values.each_with_index do |val, index|
+      if first_num + index != val
+        return false
+      end
+    end
+    return true
   end
 
   def self.three_of_a_kind?(hand)
     card_count = get_multiples(hand)
-    card_count.values.include?(3)
+    card_count.values.sort == [1, 1, 3]
   end
 
   def self.two_pair?(hand)
@@ -89,22 +104,5 @@ class HandRankings
     # TODO: Get rid of magic number
     hand.cards.any?{|card| card.number == 14}
   end
-
-  def self.flush?(hand)
-    suit = hand.cards.first.suit
-    hand.cards.all?{|card| card.suit == suit}
-  end
-
-  def self.straight?(hand)
-    ordered_card_values = hand.cards.map{|card| card.number}.sort
-    first_num = ordered_card_values.first
-    ordered_card_values.each_with_index do |val, index|
-      if first_num + index != val
-        return false
-      end
-    end
-    return true
-  end
-
 
 end
