@@ -15,9 +15,9 @@ class Game
     prepare_deck
     deal_hole_cards
     show_player_cards
-    pre_flop_betting
+    betting_round("pre-flop")
     deal_the_flop
-    post_flop_betting
+    betting_round("post-flop")
     #deal_the_turn
     #post_turn_betting
     #deal_the_river
@@ -35,21 +35,8 @@ class Game
     end
   end
 
-  def post_flop_betting
-    puts "Ready for post-flop betting? (Press enter)"
-    gets
-    @players.each do |player|
-      puts "#{player.name}: how much do you bet?"
-      bet = gets.chomp.to_i
-      @pot += bet
-      player.money = player.money - bet
-      puts "#{player.name}: has $#{player.money} remaining"
-      puts "Pot is now: $#{@pot}"
-    end
-  end
-
-  def pre_flop_betting
-    puts "Ready for pre-flop betting? (Press enter)"
+  def betting_round(round_name)
+    puts "Ready for #{round_name} betting? (Press enter)"
     gets
     @players.each do |player|
       puts "#{player.name}: how much do you bet?"
