@@ -16,9 +16,9 @@ class Game
     deal_hole_cards
     show_player_cards
     betting_round("pre-flop")
-    deal_the_flop
+    deal_community_cards("The Flop", 3)
     betting_round("post-flop")
-    deal_the_turn
+    deal_community_cards("The Turn", 1)
     #post_turn_betting
     #deal_the_river
     #final_betting
@@ -27,16 +27,10 @@ class Game
 
   private
 
-  def deal_the_flop
-    3.times do |t|
-      card = @deck.deal_card
-      puts "Next card is: #{card.inspect}"
-      @community_cards << card
-    end
-  end
-
-  def deal_the_turn
-    1.times do |t|
+  def deal_community_cards(round_name, amount)
+    puts ""
+    puts "Dealing #{round_name}"
+    amount.times do |t|
       card = @deck.deal_card
       puts "Next card is: #{card.inspect}"
       @community_cards << card
@@ -44,8 +38,7 @@ class Game
   end
 
   def betting_round(round_name)
-    puts "Ready for #{round_name} betting? (Press enter)"
-    gets
+    puts "Starting betting for #{round_name}"
     @players.each do |player|
       puts "#{player.name}: how much do you bet?"
       bet = gets.chomp.to_i
