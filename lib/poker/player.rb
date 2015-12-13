@@ -1,7 +1,7 @@
 class Player
   attr_reader :name
   attr_reader :cards
-  attr_reader :money
+  attr_accessor :money
   attr_reader :mood
 
   def initialize(name)

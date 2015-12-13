@@ -1,21 +1,44 @@
 class Game
 
   def initialize
+    @players = []
+    @pot = 0
+    @deck = Deck.new
     puts "New game starting..."
+    game_flow
+  end
 
+  def game_flow
     add_players
-    prepare_pot
+    # TODO: Separate overall Game from single hand of play
     prepare_deck
     deal_hole_cards
     show_player_cards
+    pre_flop_betting
+    deal_the_flop
+    #post_flop_betting
+    #deal_the_turn
+    #final_betting
+    #cleanup
   end
 
   private
 
+  def pre_flop_betting
+    puts "Ready for pre-flop betting? (Press enter)"
+    gets
+    @players.each do |player|
+      puts "#{player.name}: how much do you bet?"
+      bet = gets.chomp.to_i
+      @pot += bet
+      player.money = player.money - bet
+      puts "#{player.name}: has $#{player.money} remaining"
+    end
+  end
+
   def add_players
     puts "How many players?"
     number_of_players = gets.chomp.to_i
-    @players = []
     counter = 1
     number_of_players.times do |player|
       @players << Player.new("Player" + (counter).to_s)
@@ -23,12 +46,7 @@ class Game
     end
   end
 
-  def prepare_pot
-    @pot = 0
-  end
-
   def prepare_deck
-    @deck = Deck.new
     @deck.shuffle
   end
 
