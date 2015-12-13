@@ -19,9 +19,9 @@ class Game
     deal_community_cards("The Flop", 3)
     betting_round("post-flop")
     deal_community_cards("The Turn", 1)
-    #post_turn_betting
-    #deal_the_river
-    #final_betting
+    betting_round("post-turn")
+    deal_community_cards("The River", 1)
+    betting_round("das final")
     #cleanup
   end
 
