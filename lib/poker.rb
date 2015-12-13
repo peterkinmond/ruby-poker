@@ -1,11 +1,3 @@
-class Poker
+Dir["./lib/poker/*.rb"].each {|file| require file}
 
-  def self.foo(number1, number2)
-    number1 + number2
-  end
-
-  def bar(number1, number2)
-    number1 * number2
-  end
-
-end
+game = Game.new
