@@ -18,7 +18,7 @@ class Game
     betting_round("pre-flop")
     deal_the_flop
     betting_round("post-flop")
-    #deal_the_turn
+    deal_the_turn
     #post_turn_betting
     #deal_the_river
     #final_betting
@@ -29,6 +29,14 @@ class Game
 
   def deal_the_flop
     3.times do |t|
+      card = @deck.deal_card
+      puts "Next card is: #{card.inspect}"
+      @community_cards << card
+    end
+  end
+
+  def deal_the_turn
+    1.times do |t|
       card = @deck.deal_card
       puts "Next card is: #{card.inspect}"
       @community_cards << card
