@@ -4,6 +4,7 @@ class Game
     @players = []
     @pot = 0
     @deck = Deck.new
+    @community_cards = []
     puts "New game starting..."
     game_flow
   end
@@ -23,6 +24,14 @@ class Game
   end
 
   private
+
+  def deal_the_flop
+    3.times do |t|
+      card = @deck.deal_card
+      puts "Next card is: #{card.inspect}"
+      @community_cards << card
+    end
+  end
 
   def pre_flop_betting
     puts "Ready for pre-flop betting? (Press enter)"
