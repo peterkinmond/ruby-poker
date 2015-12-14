@@ -1,3 +1,5 @@
+require "./lib/poker/hand"
+
 class HandRankings
 
   Rank = Struct.new(:value, :name)
@@ -13,7 +15,19 @@ class HandRankings
   # 2  One Pair
   # 1  High Card
 
+  def self.get_rank_for_best_5(*cards)
+    highest_ranking = Rank.new(1, "High Card")
+    cards.combination(5).each do |combo|
+      combo_ranking = HandRankings.get_rank(Hand.new(*combo))
+      if combo_ranking.value > highest_ranking.value
+        highest_ranking = combo_ranking
+      end
+    end
+    highest_ranking
+  end
+
   def self.get_rank(hand)
+    # TODO: Track pair value, not just amount of pairs
     if royal_flush?(hand)
       Rank.new(10, "Royal Flush")
     elsif straight_flush?(hand)

@@ -3,6 +3,17 @@ require "./lib/poker/card"
 require "test/unit"
 
 class TestHandRankings < Test::Unit::TestCase
+  def test_get_rank_for_best_5
+    card1 = Card.new(10, 'Spades')
+    card2 = Card.new(11, 'Spades')
+    card3 = Card.new(12, 'Spades')
+    card4 = Card.new(13, 'Spades')
+    card5 = Card.new(8, 'Hearts')
+    card6 = Card.new(5, 'Diamonds')
+    card7 = Card.new(14, 'Spades')
+    rank = HandRankings.get_rank_for_best_5(card1, card2, card3, card4, card5, card6, card7)
+    assert_equal(10, rank.value)
+  end
 
   def test_royal_flush
     card1 = Card.new(10, 'Spades')

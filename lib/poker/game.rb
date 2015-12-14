@@ -22,36 +22,31 @@ class Game
     betting_round("post-turn")
     deal_community_cards("The River", 1)
     betting_round("das final")
-    #finish
+    finish
   end
 
   private
 
-  #def finish
-    ## Players show cards
-    #@players.each do |player|
-      #puts player.cards.inspect
-    #end
-
-    ## Figure out winner
-    #@players.each do |player|
-      #figure_out_best_hand(player)
-    #end
-
-    ## Give pot to winner
-
-    ## Announce winner total
-    #puts "The winner is #{@winning_player}"
-  #end
-
-  def figure_out_best_hand(player)
-    total_cards = player.cards + @community_cards
-    total_cards.combination(5).each do |combo|
-      combo_ranking = HandRankings.get_rank(Hand.new(combo))
-      if combo_ranking > player.hand_ranking
-        player.hand_ranking = combo_ranking
-      end
+  def finish
+    # Players show cards
+    @players.each do |player|
+      puts player.cards.inspect
     end
+
+    # Figure out winner
+    @players.each do |player|
+      player.hand_ranking = HandRankings.get_rank_for_best_5(*(player.cards + @community_cards))
+      puts "#{player.name} has a #{player.hand_ranking.name}"
+    end
+
+    # Give pot to winner
+    # TODO: Allow tied players to split the pot
+    @winning_player = @players.max_by{|p| p.hand_ranking.value}
+    @winning_player.money += @pot
+
+    # Announce winner total
+    puts "The winner is #{@winning_player.name} and they won a pot of #{@pot}"
+    puts "They now have #{@winning_player.money}"
   end
 
   def deal_community_cards(round_name, amount)
@@ -68,6 +63,7 @@ class Game
     puts "Starting betting for #{round_name}"
     @players.each do |player|
       # TODO: Allow checking/folding
+      # TODO: Make each player bet the same amount
       puts "#{player.name}: how much do you bet?"
       bet = gets.chomp.to_i
       @pot += bet
