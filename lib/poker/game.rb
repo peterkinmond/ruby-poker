@@ -1,6 +1,8 @@
 class Game
 
   def initialize
+    # TODO: Add antes for big blind/small blind
+    # TODO: Rotate the big blind/small blind
     @players = []
     @winning_player = nil
     @pot = 0
