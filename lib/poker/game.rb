@@ -47,7 +47,7 @@ class Game
   def figure_out_best_hand(player)
     total_cards = player.cards + @community_cards
     total_cards.combination(5).each do |combo|
-      combo_ranking = HandRankings.get_rank(combo)
+      combo_ranking = HandRankings.get_rank(Hand.new(combo))
       if combo_ranking > player.hand_ranking
         player.hand_ranking = combo_ranking
       end
