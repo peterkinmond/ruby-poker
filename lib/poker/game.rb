@@ -2,14 +2,14 @@ class Game
 
   def initialize
     @players = []
+    @winning_player = nil
     @pot = 0
     @deck = Deck.new
     @community_cards = []
-    puts "New game starting..."
-    game_flow
   end
 
-  def game_flow
+  def start
+    puts "New game starting..."
     add_players
     # TODO: Separate overall Game from single hand of play
     prepare_deck
@@ -22,10 +22,37 @@ class Game
     betting_round("post-turn")
     deal_community_cards("The River", 1)
     betting_round("das final")
-    #cleanup
+    #finish
   end
 
   private
+
+  #def finish
+    ## Players show cards
+    #@players.each do |player|
+      #puts player.cards.inspect
+    #end
+
+    ## Figure out winner
+    #@players.each do |player|
+      #figure_out_best_hand(player)
+    #end
+
+    ## Give pot to winner
+
+    ## Announce winner total
+    #puts "The winner is #{@winning_player}"
+  #end
+
+  def figure_out_best_hand(player)
+    total_cards = player.cards + @community_cards
+    total_cards.combination(5).each do |combo|
+      combo_ranking = HandRankings.get_rank(combo)
+      if combo_ranking > player.hand_ranking
+        player.hand_ranking = combo_ranking
+      end
+    end
+  end
 
   def deal_community_cards(round_name, amount)
     puts ""
@@ -40,6 +67,7 @@ class Game
   def betting_round(round_name)
     puts "Starting betting for #{round_name}"
     @players.each do |player|
+      # TODO: Allow checking/folding
       puts "#{player.name}: how much do you bet?"
       bet = gets.chomp.to_i
       @pot += bet
